@@ -96,7 +96,7 @@ export const SneakerDetails = (props) => {
   return (
     <Row className="row row-centered pos">
         <Breadcrumb  className="mt-3" >
-        <Breadcrumb.Item c href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item c href="/sneakersXu">Sneakers</Breadcrumb.Item>
         <Breadcrumb.Item  className=" mx-3" href="#" active >{sneaker.brand} {sneaker.model}</Breadcrumb.Item>
         </Breadcrumb>
       <h1>
