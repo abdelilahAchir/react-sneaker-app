@@ -10,10 +10,9 @@ import { Sneakers } from "./components/Sneakers";
 import { SneakerDetails } from './components/SneakerDetails'
 import { Route, BrowserRouter, } from "react-router-dom";
 import { Routes, } from "react-router";
-import { AuthenticatedTemplate } from "@azure/msal-react";
-import { ProfileContent } from "./components/ProfileContent";
-import { ShoeContext } from './context/ShoeContext'
 
+import { ShoeContext } from './context/ShoeContext'
+import { Home } from './components/Home'
 
 const App = () => {
   // const [cart, setCart] = useState([]);
@@ -58,10 +57,10 @@ const App = () => {
       <ShoeContext.Provider value={{ itemsInCart, setItemsInCart, numInCart, setNumInCart, shippingInfo, setShippingInfo }}>
         <div className="container">
           <Navbarr />
-          <AuthenticatedTemplate>
-            <ProfileContent />
-          </AuthenticatedTemplate>
+
           <Routes>
+            <Route path="/" element={<Home />} />
+
             <Route path="/sneakersXu" element={<Sneakers />} />
             <Route path="/sneakerDetails/:brand/:model" element={<SneakerDetails />} />
             <Route path="/cart" element={<Cart />} />

@@ -31,7 +31,6 @@ import { callMsGraph } from "../Graph";
     return (
         <>
             <h5 className="card-title">Welcome {name}</h5>
-            {console.log(graphData)}
             {graphData ? 
            
                 <ProfileData graphData={graphData} />

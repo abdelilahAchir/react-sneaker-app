@@ -13,12 +13,10 @@ export const SignInButton = () => {
     const handleLogin = (loginType) => {
         if (loginType === "popup") {
             instance.loginPopup(loginRequest).catch(e => {
-                console.log("bror")
-                console.log(e.message);
             });
         }
     }
     return (
-        <Button variant="secondary" className="ml-auto" onClick={() => handleLogin("popup")}>Sign in using Popup</Button>
+        <Button variant="success" className="ml-auto" onClick={() => handleLogin("popup")}>Sign in</Button>
     );
 }

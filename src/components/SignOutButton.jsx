@@ -18,6 +18,6 @@ export const SignOutButton = () => {
     }
 
     return (
-        <Button variant="secondary" className="ml-auto" onClick={() => handleLogout("popup")}>Sign out using Popup</Button>
+        <Button variant="danger" className="ml-auto" onClick={() => handleLogout("popup")}>Sign out</Button>
     );
 }

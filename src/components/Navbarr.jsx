@@ -5,13 +5,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faCartShopping, } from '@fortawesome/free-solid-svg-icons'
 import './NavBar.css'
 import 'font-awesome/css/font-awesome.min.css'; 
-import { useIsAuthenticated } from "@azure/msal-react";
+//import { useIsAuthenticated } from "@azure/msal-react";
 import { SignInButton } from "./SingInButton";
 import { SignOutButton } from "./SignOutButton";
-//import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { ProfileContent } from "./ProfileContent";
+
+
+
 export const Navbarr = (props) => {
 
-  const isAuthenticated = useIsAuthenticated();
+  //const isAuthenticated = useIsAuthenticated();
 
   return (
     <>
@@ -27,8 +31,15 @@ export const Navbarr = (props) => {
           
             <Nav.Link href="/">Contact uZ</Nav.Link>
             <Nav.Link href="/cart"><FontAwesomeIcon icon={faCartShopping}/></Nav.Link>
-            {isAuthenticated ? <SignOutButton/> : <SignInButton/>}
+          
           </Nav>
+          <UnauthenticatedTemplate>
+            <SignInButton/>
+            </UnauthenticatedTemplate>
+          <AuthenticatedTemplate>
+            <ProfileContent />
+            <SignOutButton/>
+          </AuthenticatedTemplate>
         </Navbar.Collapse>
       </Container>
     </Navbar>
