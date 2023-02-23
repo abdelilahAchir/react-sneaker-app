@@ -6,7 +6,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { CartContext } from './CartContext';
+//import { CartContext } from './CartContext';
 import{ ShoeContext }from '../context/ShoeContext'
 
 
@@ -19,13 +19,13 @@ export const SneakerDetails = (props) => {
 
 
   //const [selectedColor, setSelectedColor] = useState(sneaker.colors[0])
-  const [item, setItem] = useState({});
-  const [sizes, setSizes] = useState([]);
-  const [shoeSize, setShoeSize] = useState('');
+  //const [item, setItem] = useState({});
+  // const [sizes, setSizes] = useState([]);
+  // const [shoeSize, setShoeSize] = useState('');
   //const { id } = useParams();
-  const itemsInCart = useContext(ShoeContext).itemsInCart;
+  //const itemsInCart = useContext(ShoeContext).itemsInCart;
   const setItemsInCart = useContext(ShoeContext).setItemsInCart;
-  const numInCart = useContext(ShoeContext).numInCart;
+  //const numInCart = useContext(ShoeContext).numInCart;
   const setNumInCart = useContext(ShoeContext).setNumInCart;
 
   useEffect(() => {
@@ -60,33 +60,33 @@ export const SneakerDetails = (props) => {
     setNumInCart(currentProducts.reduce((total, product) => total + product.quantity, 0));
   };
 
-  const addToCart = (e) => {
-    e.preventDefault();
-    let currentProducts = JSON.parse(sessionStorage.getItem('itemsInCart'));
+  // const addToCart = (e) => {
+  //   e.preventDefault();
+  //   let currentProducts = JSON.parse(sessionStorage.getItem('itemsInCart'));
 
-    if(currentProducts !== null){
-      for(let i in currentProducts){
+  //   if(currentProducts !== null){
+  //     for(let i in currentProducts){
       
-        if(Object.values(currentProducts[i]).includes(item._id) && Object.values(currentProducts[i]).includes(item.size)){
-          currentProducts[i].quantity++;
-          sessionStorage.setItem('itemsInCart', JSON.stringify([...currentProducts]));
-          sessionStorage.setItem('numInCart', numInCart + 1);
-          const updateItemsInCart = JSON.parse(sessionStorage.getItem('itemsInCart'));
-          setItemsInCart(updateItemsInCart);
-          setNumInCart(sessionStorage.numInCart);
-          return;
-        }
-      }
-      sessionStorage.setItem('itemsInCart', JSON.stringify([...currentProducts, item]));
-      sessionStorage.setItem('numInCart', numInCart + 1);
-      const updateItemsInCart = JSON.parse(sessionStorage.getItem('itemsInCart'));
-      setItemsInCart(updateItemsInCart);
-    } else {
-      sessionStorage.setItem('itemsInCart', JSON.stringify([item]));
-      sessionStorage.numInCart = 1;
-    }
-    setNumInCart(sessionStorage.numInCart);
-  }
+  //       if(Object.values(currentProducts[i]).includes(item._id) && Object.values(currentProducts[i]).includes(item.size)){
+  //         currentProducts[i].quantity++;
+  //         sessionStorage.setItem('itemsInCart', JSON.stringify([...currentProducts]));
+  //         sessionStorage.setItem('numInCart', numInCart + 1);
+  //         const updateItemsInCart = JSON.parse(sessionStorage.getItem('itemsInCart'));
+  //         setItemsInCart(updateItemsInCart);
+  //         setNumInCart(sessionStorage.numInCart);
+  //         return;
+  //       }
+  //     }
+  //     sessionStorage.setItem('itemsInCart', JSON.stringify([...currentProducts, item]));
+  //     sessionStorage.setItem('numInCart', numInCart + 1);
+  //     const updateItemsInCart = JSON.parse(sessionStorage.getItem('itemsInCart'));
+  //     setItemsInCart(updateItemsInCart);
+  //   } else {
+  //     sessionStorage.setItem('itemsInCart', JSON.stringify([item]));
+  //     sessionStorage.numInCart = 1;
+  //   }
+  //   setNumInCart(sessionStorage.numInCart);
+  // }
 
 
   if (!sneaker) {

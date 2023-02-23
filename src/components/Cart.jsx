@@ -1,5 +1,5 @@
 import React,{useContext, useState, useEffect} from 'react';
-import { CartContext } from './CartContext';
+//import { CartContext } from './CartContext';
 import ShoeContext from '../context/ShoeContext';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,17 +8,17 @@ import Button from 'react-bootstrap/Button';
 
 export const Cart = ( props) => {
   const [subtotal, setSubtotal] = useState(0);
-  const [taxes, setTaxes] = useState(0);
-  const [total, setTotal] = useState(0);
-  const products = useContext(ShoeContext).itemsInCart;
-  const numInCart = useContext(ShoeContext).numInCart;
-  const setNumInCart = useContext(ShoeContext).setNumInCart;
+  //const [taxes, setTaxes] = useState(0);
+ // const [total, setTotal] = useState(0);
+ // const products = useContext(ShoeContext).itemsInCart;
+ // const numInCart = useContext(ShoeContext).numInCart;
+ // const setNumInCart = useContext(ShoeContext).setNumInCart;
   const itemsInCart = useContext(ShoeContext).itemsInCart;
-  const setItemsInCart = useContext(ShoeContext).setItemsInCart;
+ // const setItemsInCart = useContext(ShoeContext).setItemsInCart;
   //const [animate] = useAutoAnimate();
-  const [shoeQuantity, setShoeQuantity] = useState('');
+ // const [shoeQuantity, setShoeQuantity] = useState('');
 
-  const quantity = [1,2,3,4,5,6,7,8]
+  //const quantity = [1,2,3,4,5,6,7,8]
 
   useEffect(() => {
     const cart = JSON.parse(sessionStorage.getItem('itemsInCart'))
@@ -32,12 +32,12 @@ export const Cart = ( props) => {
     }
     setSubtotal(sum.toFixed(2));
 
-    const taxEstimate = sum * 0.05;
-    setTaxes(taxEstimate.toFixed(2));
+  //   const taxEstimate = sum * 0.05;
+  //   setTaxes(taxEstimate.toFixed(2));
 
-    const tempTotal = sum + taxEstimate + 5
-    setTotal(tempTotal.toFixed(2));
-  }
+  //   const tempTotal = sum + taxEstimate + 5
+  //   setTotal(tempTotal.toFixed(2));
+   }
 
   ///const { cart, removeFromCart } = useContext(CartContext);
   return (

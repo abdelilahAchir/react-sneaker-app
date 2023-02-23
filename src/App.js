@@ -10,38 +10,36 @@ import { Sneakers } from "./components/Sneakers";
 import { SneakerDetails } from './components/SneakerDetails'
 import { Route, BrowserRouter, } from "react-router-dom";
 import { Routes, } from "react-router";
-import { CartProvider } from './components/CartContext';
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { AuthenticatedTemplate } from "@azure/msal-react";
 import { ProfileContent } from "./components/ProfileContent";
-import { ProfileData } from "./components/ProfileData";
 import { ShoeContext } from './context/ShoeContext'
 
 
 const App = () => {
-  const [cart, setCart] = useState([]);
-  console.log(cart)
+  // const [cart, setCart] = useState([]);
+  // console.log(cart)
 
-  const addToCart = (sneaker) => {
-    // Add the sneaker to the cart state
-    setCart([...cart, sneaker]);
-    console.log(cart.length)
-    console.log(sneaker)
-    console.log(cart)
-  };
+  // const addToCart = (sneaker) => {
+  //   // Add the sneaker to the cart state
+  //   setCart([...cart, sneaker]);
+  //   console.log(cart.length)
+  //   console.log(sneaker)
+  //   console.log(cart)
+  // };
 
-  const removeFromCart = (index) => {
-    // Remove the sneaker from the cart state
-    const newCart = [...cart];
-    newCart.splice(index, 1);
-    setCart(newCart);
-  };
+  // const removeFromCart = (index) => {
+  //   // Remove the sneaker from the cart state
+  //   const newCart = [...cart];
+  //   newCart.splice(index, 1);
+  //   setCart(newCart);
+  // };
 
   const [itemsInCart, setItemsInCart] = useState([]);
-  console.log(itemsInCart)
+  //console.log(itemsInCart)
   const [numInCart, setNumInCart] = useState(0);
 
-  const [logged, setLogged] = useState("");
-  const [user, setUser] = useState("");
+  // const [logged, setLogged] = useState("");
+  // const [user, setUser] = useState("");
 
   const [shippingInfo, setShippingInfo] = useState({})
 

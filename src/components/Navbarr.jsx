@@ -8,7 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useIsAuthenticated } from "@azure/msal-react";
 import { SignInButton } from "./SingInButton";
 import { SignOutButton } from "./SignOutButton";
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+//import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 export const Navbarr = (props) => {
 
   const isAuthenticated = useIsAuthenticated();

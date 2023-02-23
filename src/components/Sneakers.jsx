@@ -5,7 +5,7 @@ import Container from "react-bootstrap/esm/Container";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import SneakerDetails from "./SneakerDetails";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC5jLQAezHjVaqaL1y3nfPOHXH6KFJ-0oU",
