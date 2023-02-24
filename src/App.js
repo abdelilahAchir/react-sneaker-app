@@ -13,6 +13,7 @@ import { Routes, } from "react-router";
 
 import { ShoeContext } from './context/ShoeContext'
 import { Home } from './components/Home'
+import Container from "react-bootstrap/esm/Container";
 
 const App = () => {
   // const [cart, setCart] = useState([]);
@@ -55,18 +56,15 @@ const App = () => {
   return (
     <BrowserRouter>
       <ShoeContext.Provider value={{ itemsInCart, setItemsInCart, numInCart, setNumInCart, shippingInfo, setShippingInfo }}>
-        <div className="container">
+        <Container >
           <Navbarr />
-
           <Routes>
             <Route path="/" element={<Home />} />
-
             <Route path="/sneakersXu" element={<Sneakers />} />
             <Route path="/sneakerDetails/:brand/:model" element={<SneakerDetails />} />
             <Route path="/cart" element={<Cart />} />
-
           </Routes>
-        </div>
+        </Container>
       </ShoeContext.Provider>
     </BrowserRouter>
 

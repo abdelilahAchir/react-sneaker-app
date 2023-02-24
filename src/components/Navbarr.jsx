@@ -19,32 +19,30 @@ export const Navbarr = (props) => {
 
   return (
     <>
+    <Container >
     <Navbar bg="success" expand="lg">
       <Container>
         <Navbar.Brand href="/" className=''>Snkrs X u</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-
-         
             <Nav.Link href="/sneakersXu">Shop</Nav.Link>
-          
             <Nav.Link href="/">Contact uZ</Nav.Link>
             <Nav.Link href="/cart"><FontAwesomeIcon icon={faCartShopping}/></Nav.Link>
-          
           </Nav>
           <UnauthenticatedTemplate>
             <SignInButton/>
             </UnauthenticatedTemplate>
           <AuthenticatedTemplate>
-            <ProfileContent />
-            <SignOutButton/>
+            <ProfileContent  />
+            <SignOutButton />
           </AuthenticatedTemplate>
         </Navbar.Collapse>
       </Container>
+     
     </Navbar>
     {props.children}
-
+    </Container>
     </>
   );
 };

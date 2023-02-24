@@ -6,9 +6,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-//import { CartContext } from './CartContext';
 import{ ShoeContext }from '../context/ShoeContext'
-
 
 
 export const SneakerDetails = (props) => {
@@ -16,7 +14,7 @@ export const SneakerDetails = (props) => {
    const { brand, model } = useParams();
    const [sneaker, setSneaker] = useState(null);
   // const { addToCart } = useContext(CartContext);
-
+  const [isAdded, setIsAdded] = useState(false);
 
   //const [selectedColor, setSelectedColor] = useState(sneaker.colors[0])
   //const [item, setItem] = useState({});
@@ -47,11 +45,13 @@ export const SneakerDetails = (props) => {
     e.preventDefault();
     const currentProducts = JSON.parse(sessionStorage.getItem('itemsInCart')) || [];
     const newItem = { ...sneaker, quantity: 1 };
+    setIsAdded(true);
     const existingItemIndex = currentProducts.findIndex(
       (product) => product.id === newItem.id 
     );
     if (existingItemIndex !== -1) {
       currentProducts[existingItemIndex].quantity++;
+
     } else {
       currentProducts.push(newItem);
     }
@@ -96,7 +96,7 @@ export const SneakerDetails = (props) => {
   return (
     <Row className="row row-centered pos">
         <Breadcrumb  className="mt-3" >
-        <Breadcrumb.Item c href="/sneakersXu">Sneakers</Breadcrumb.Item>
+        <Breadcrumb.Item  href="/sneakersXu">Sneakers</Breadcrumb.Item>
         <Breadcrumb.Item  className=" mx-3" href="#" active >{sneaker.brand} {sneaker.model}</Breadcrumb.Item>
         </Breadcrumb>
       <h1>
@@ -113,7 +113,10 @@ export const SneakerDetails = (props) => {
         <Col className="btn btn-light mx-1">{color.name}</Col>
       ))
       }</p>
-      <Button className="mb-3" onClick={addToCart2}>Add to cart</Button>
+     
+      <Button  className="mb-3" onClick={addToCart2}>{isAdded ? 'Added' : 'Add to cart'}</Button>
+    
+     
     </Row>
   );
 };
