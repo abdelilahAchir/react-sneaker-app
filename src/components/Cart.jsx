@@ -83,6 +83,8 @@ export const Cart = (props) => {
   };
   const DescendQuantityOfItem = (e, id) => {
     e.preventDefault();
+    console.log(itemsInCart)
+
     const oldQuantity = products[id].quantity;
     console.log(oldQuantity);
     if (oldQuantity > 0) {
@@ -150,6 +152,7 @@ export const Cart = (props) => {
                     <h3>Gender: {item.gender}</h3>
                     <h4>Quantity: {item.quantity}</h4>
                     <h4>Price : {item.price} $</h4>
+                    <h4>Size: {item.shoeSize}</h4>
                     <div>
                       <Button
                         variant="danger"

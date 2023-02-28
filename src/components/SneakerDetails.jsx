@@ -17,9 +17,9 @@ export const SneakerDetails = (props) => {
   const navigate = useNavigate();
 
   //const [selectedColor, setSelectedColor] = useState(sneaker.colors[0])
-  //const [item, setItem] = useState({});
+  const [item, setItem] = useState({});
   // const [sizes, setSizes] = useState([]);
-  // const [shoeSize, setShoeSize] = useState('');
+  const [shoeSize, setShoeSize] = useState('');
   //const { id } = useParams();
   //const itemsInCart = useContext(ShoeContext).itemsInCart;
   const setItemsInCart = useContext(ShoeContext).setItemsInCart;
@@ -44,10 +44,16 @@ export const SneakerDetails = (props) => {
   const addToCart = (e) => {
     e.preventDefault();
     const currentProducts = JSON.parse(sessionStorage.getItem('itemsInCart')) || [];
-    const newItem = { ...sneaker, quantity: 1 };
+    console.log(item)
+
+
+
+    const newItem = { ...sneaker, quantity: 1, shoeSize: shoeSize ? shoeSize : sneaker.sizes[0].name };
+
+    console.log(newItem)
     setIsAdded(true);
     const existingItemIndex = currentProducts.findIndex(
-      (product) => product.id === newItem.id
+      (product) => product.id === newItem.id && product.shoeSize === newItem.shoeSize
     );
     if (existingItemIndex !== -1) {
       currentProducts[existingItemIndex].quantity++;
@@ -60,6 +66,12 @@ export const SneakerDetails = (props) => {
     setNumInCart(currentProducts.reduce((total, product) => total + product.quantity, 0));
     navigate('/cart');
   };
+
+  const sizeHandler = (size) => {
+    setShoeSize(size);
+    setItem({ ...sneaker, size: size });
+    console.log({ ...sneaker, size: size });
+  }
 
   if (!sneaker) {
     return <div>Loading...</div>;
@@ -77,8 +89,8 @@ export const SneakerDetails = (props) => {
       </h1>
       <img src={sneaker.images_urls[0].name} alt={sneaker.brand} />
       <p className="mt-3">Price: {sneaker.price} $</p>
-      <p>Sizes: {sneaker.sizes.map(size => (
-        <Col className="btn  btn-light  mx-1" >{size.name}</Col>)
+      <p>Sizes: {sneaker.sizes.map((size, id) => (
+        <Col className="btn  btn-light  mx-1" onClick={() => sizeHandler(size.name)}>{size.name}</Col>)
       )}
       </p>
       <p>Colors: {sneaker.colors.map(color => (
