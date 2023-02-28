@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-//import { CartContext } from './CartContext';
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import ShoeContext from "../context/ShoeContext";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,20 +6,26 @@ import Container from "react-bootstrap/esm/Container";
 import Button from "react-bootstrap/Button";
 import {
   XMarkIcon,
+  PlusIcon,
+  MinusIcon,
 } from "@heroicons/react/20/solid";
+import { Transition, Menu } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
 export const Cart = (props) => {
-  const [subtotal, setSubtotal] = useState(0);
+
   //const [taxes, setTaxes] = useState(0);
   // const [total, setTotal] = useState(0);
-  // const products = useContext(ShoeContext).itemsInCart;
+  // const [shoeQuantity, setShoeQuantity] = useState("");
+  const [subtotal, setSubtotal] = useState(0);
+  const products = useContext(ShoeContext).itemsInCart;
   const numInCart = useContext(ShoeContext).numInCart;
   const setNumInCart = useContext(ShoeContext).setNumInCart;
   const itemsInCart = useContext(ShoeContext).itemsInCart;
   const setItemsInCart = useContext(ShoeContext).setItemsInCart;
-  //const [animate] = useAutoAnimate();
-  // const [shoeQuantity, setShoeQuantity] = useState('');
 
-  //const quantity = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   useEffect(() => {
     const cart = JSON.parse(sessionStorage.getItem("itemsInCart"));
@@ -53,7 +58,76 @@ export const Cart = (props) => {
     setNumInCart(numInCart - quantity);
     updateCartTotal(itemsInCart);
   };
-  ///const { cart, removeFromCart } = useContext(CartContext);
+
+  const RaiseQuantityOfItem = (e, id) => {
+    e.preventDefault();
+    const oldQuantity = products[id].quantity;
+    console.log(oldQuantity);
+    const newQuantity = oldQuantity + 1;
+    products[id].quantity = newQuantity;
+    sessionStorage.setItem("itemsInCart", JSON.stringify([...products]));
+    if (newQuantity >= oldQuantity) {
+      sessionStorage.setItem(
+        "numInCart",
+        numInCart + (newQuantity - oldQuantity)
+      );
+      setNumInCart(numInCart + newQuantity - 1);
+    } else {
+      sessionStorage.setItem(
+        "numInCart",
+        numInCart - (oldQuantity - newQuantity)
+      );
+      setNumInCart(numInCart - (oldQuantity - newQuantity));
+    }
+    updateCartTotal(itemsInCart);
+  };
+  const DescendQuantityOfItem = (e, id) => {
+    e.preventDefault();
+    const oldQuantity = products[id].quantity;
+    console.log(oldQuantity);
+    if (oldQuantity > 0) {
+      const newQuantity = oldQuantity - 1;
+      products[id].quantity = newQuantity;
+      sessionStorage.setItem("itemsInCart", JSON.stringify([...products]));
+      if (newQuantity >= oldQuantity) {
+        sessionStorage.setItem(
+          "numInCart",
+          numInCart + (newQuantity - oldQuantity)
+        );
+        setNumInCart(numInCart + newQuantity - 1);
+      } else {
+        sessionStorage.setItem(
+          "numInCart",
+          numInCart - (oldQuantity - newQuantity)
+        );
+        setNumInCart(numInCart - (oldQuantity - newQuantity));
+      }
+      updateCartTotal(itemsInCart);
+    }
+  };
+
+  const onChangeCartSelect = (e, idx) => {
+    const oldQuantity = products[idx].quantity;
+    const newQuantity = e.target.id;
+    products[idx].quantity = newQuantity;
+
+    sessionStorage.setItem("itemsInCart", JSON.stringify([...products]));
+    if (newQuantity >= oldQuantity) {
+      sessionStorage.setItem(
+        "numInCart",
+        numInCart + (newQuantity - oldQuantity)
+      );
+      setNumInCart(numInCart + newQuantity - 1);
+    } else {
+      sessionStorage.setItem(
+        "numInCart",
+        numInCart - (oldQuantity - newQuantity)
+      );
+      setNumInCart(numInCart - (oldQuantity - newQuantity));
+    }
+    updateCartTotal(itemsInCart);
+  };
+
   return (
     <Container>
       {itemsInCart.length === 0 ? (
@@ -81,9 +155,58 @@ export const Cart = (props) => {
                         variant="danger"
                         onClick={(e) => removeFromCart(e, id)}
                       >
-                        <span>Remove</span>
-                        <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                        <span>-----</span>
+                        <XMarkIcon aria-hidden="true" />
                       </Button>
+                      <Button
+                        variant="success"
+                        className="ms-1"
+                        onClick={(e) => RaiseQuantityOfItem(e, id)}
+                      >
+                        <span>-----</span>
+                        <PlusIcon
+                        />
+                      </Button>
+                      <Button
+                        variant="primary"
+                        className="ms-1"
+                        onClick={(e) => DescendQuantityOfItem(e, id)}
+                      >
+                        <span>-----</span>
+                        <MinusIcon aria-hidden="true" />
+                      </Button>
+                      <div className="mt-3 ">
+                        <Menu>
+                          <div>
+                            <Menu.Button>
+                              {item.quantity}
+                              <ChevronDownIcon />
+                            </Menu.Button>
+                          </div>
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Menu.Items>
+                              {quantity?.map((quantity, quantityIdx) => (
+                                <Menu.Item
+                                  key={quantity + quantityIdx}
+                                  id={quantity}
+                                >
+                                  <p onClick={(e) => onChangeCartSelect(e, id)}>
+                                    {quantity}
+                                  </p>
+                                </Menu.Item>
+                              ))}
+                            </Menu.Items>
+                          </Transition>
+                        </Menu>
+                      </div>
                     </div>
                   </div>
                 ))}
