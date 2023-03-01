@@ -16,7 +16,7 @@ export const SneakerDetails = (props) => {
   const [isAdded, setIsAdded] = useState(false);
   const navigate = useNavigate();
 
-  //const [selectedColor, setSelectedColor] = useState(sneaker.colors[0])
+  const [selectedColor, setSelectedColor] = useState('')
   const [item, setItem] = useState({});
   // const [sizes, setSizes] = useState([]);
   const [shoeSize, setShoeSize] = useState('');
@@ -43,17 +43,13 @@ export const SneakerDetails = (props) => {
 
   const addToCart = (e) => {
     e.preventDefault();
-    const currentProducts = JSON.parse(sessionStorage.getItem('itemsInCart')) || [];
     console.log(item)
-
-
-
-    const newItem = { ...sneaker, quantity: 1, shoeSize: shoeSize ? shoeSize : sneaker.sizes[0].name };
-
+    const currentProducts = JSON.parse(sessionStorage.getItem('itemsInCart')) || [];
+    const newItem = { ...sneaker, quantity: 1, shoeSize: shoeSize ? shoeSize : sneaker.sizes[0].name, selectedColor: selectedColor ? selectedColor : sneaker.colors[0].name };
     console.log(newItem)
     setIsAdded(true);
     const existingItemIndex = currentProducts.findIndex(
-      (product) => product.id === newItem.id && product.shoeSize === newItem.shoeSize
+      (product) => product.id === newItem.id && product.shoeSize === newItem.shoeSize && product.color === newItem.selectedColor
     );
     if (existingItemIndex !== -1) {
       currentProducts[existingItemIndex].quantity++;
@@ -71,6 +67,12 @@ export const SneakerDetails = (props) => {
     setShoeSize(size);
     setItem({ ...sneaker, size: size });
     console.log({ ...sneaker, size: size });
+  }
+
+  const ColorHandler = (color) => {
+    setSelectedColor(color);
+    setItem({ ...sneaker, color: color });
+    console.log({ ...sneaker, color: color });
   }
 
   if (!sneaker) {
@@ -94,7 +96,7 @@ export const SneakerDetails = (props) => {
       )}
       </p>
       <p>Colors: {sneaker.colors.map(color => (
-        <Col className="btn btn-light mx-1">{color.name}</Col>
+        <Col className="btn btn-light mx-1" onClick={() => ColorHandler(color.name)}>{color.name} </Col>
       ))
       }</p>
 
