@@ -221,7 +221,7 @@ export const Cart = (props) => {
               <h1> Subtotal: {subtotal} $</h1>
             </ul>
           </Col>
-          <Button className="mb-5 mt-3 mx-2" onClick={() => updateCartTotal()}>
+          <Button href="/checkout" className="mb-5 mt-3 mx-2" onClick={() => updateCartTotal()}>
             Check out
           </Button>
         </Row>

@@ -4,7 +4,6 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { ShoeContext } from '../context/ShoeContext'
 import { useNavigate } from "react-router-dom";
@@ -17,10 +16,11 @@ export const SneakerDetails = (props) => {
   const navigate = useNavigate();
 
   const [selectedColor, setSelectedColor] = useState('')
+  const [buttonColor, setButtonColor] = useState('light')
+
   const [item, setItem] = useState({});
   // const [sizes, setSizes] = useState([]);
   const [shoeSize, setShoeSize] = useState('');
-  //const { id } = useParams();
   //const itemsInCart = useContext(ShoeContext).itemsInCart;
   const setItemsInCart = useContext(ShoeContext).setItemsInCart;
   //const numInCart = useContext(ShoeContext).numInCart;
@@ -67,13 +67,17 @@ export const SneakerDetails = (props) => {
     setShoeSize(size);
     setItem({ ...sneaker, size: size });
     console.log({ ...sneaker, size: size });
+    setButtonColor('success');
+
   }
 
   const ColorHandler = (color) => {
     setSelectedColor(color);
     setItem({ ...sneaker, color: color });
     console.log({ ...sneaker, color: color });
+    setButtonColor('success');
   }
+
 
   if (!sneaker) {
     return <div>Loading...</div>;
@@ -92,15 +96,15 @@ export const SneakerDetails = (props) => {
       <img src={sneaker.images_urls[0].name} alt={sneaker.brand} />
       <p className="mt-3">Price: {sneaker.price} $</p>
       <p>Sizes: {sneaker.sizes.map((size, id) => (
-        <Col className="btn  btn-light  mx-1" onClick={() => sizeHandler(size.name)}>{size.name}</Col>)
+        <Button className="btn mx-1" variant={size.name === shoeSize ? buttonColor : 'light'} onClick={() => sizeHandler(size.name)}>{size.name}</Button>)
       )}
       </p>
-      <p>Colors: {sneaker.colors.map(color => (
-        <Col className="btn btn-light mx-1" onClick={() => ColorHandler(color.name)}>{color.name} </Col>
+      <p>Colors: {sneaker.colors.map((color, id) => (
+        <Button key={id} className="btn mx-1" variant={color.name === selectedColor ? buttonColor : 'light'} onClick={() => { ColorHandler(color.name) }}>{color.name} </Button>
       ))
       }</p>
 
-      <Button className="mb-3" onClick={addToCart}>{isAdded ? 'Added' : 'Add to cart'}</Button>
+      <Button className="mb-3 " onClick={addToCart}>{isAdded ? 'Added' : 'Add to cart'}</Button>
 
 
     </Row>

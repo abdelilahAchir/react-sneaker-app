@@ -14,6 +14,7 @@ import { Routes, } from "react-router";
 import { ShoeContext } from './context/ShoeContext'
 import { Home } from './components/Home'
 import Container from "react-bootstrap/esm/Container";
+import CheckOut from "./components/CheckOut";
 
 const App = () => {
   // const [cart, setCart] = useState([]);
@@ -63,6 +64,8 @@ const App = () => {
             <Route path="/sneakersXu" element={<Sneakers />} />
             <Route path="/sneakerDetails/:brand/:model" element={<SneakerDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<CheckOut />} />
+
           </Routes>
         </Container>
       </ShoeContext.Provider>
