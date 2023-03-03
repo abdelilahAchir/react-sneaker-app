@@ -42,11 +42,7 @@ export const Sneakers = () => {
     navigate(`/sneakerDetails/${sneaker.brand}/${sneaker.model}`);
   };
 
-  const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
   return (
     <>
       <Container className="mt-3 ">
