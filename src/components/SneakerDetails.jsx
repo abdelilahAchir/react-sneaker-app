@@ -96,7 +96,7 @@ export const SneakerDetails = (props) => {
       <img src={sneaker.images_urls[0].name} alt={sneaker.brand} />
       <p className="mt-3">Price: {sneaker.price} $</p>
       <p>Sizes: {sneaker.sizes.map((size, id) => (
-        <Button className="btn mx-1" variant={size.name === shoeSize ? buttonColor : 'light'} onClick={() => sizeHandler(size.name)}>{size.name}</Button>)
+        <Button key={id} className="btn mx-1" variant={size.name === shoeSize ? buttonColor : 'light'} onClick={() => sizeHandler(size.name)}>{size.name}</Button>)
       )}
       </p>
       <p>Colors: {sneaker.colors.map((color, id) => (

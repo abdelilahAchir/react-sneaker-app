@@ -30,7 +30,8 @@ export const Navbarr = (props) => {
               <Nav className="me-auto">
                 <Nav.Link href="/sneakersXu">Shop</Nav.Link>
                 <Nav.Link href="/">Contact uZ</Nav.Link>
-                <Nav.Link href="/cart"><FontAwesomeIcon icon={faCartShopping} /> {itemsInCart.length > 0 ? itemsInCart.length : ''}</Nav.Link>
+                {console.log(itemsInCart)}
+                <Nav.Link href="/cart"><FontAwesomeIcon icon={faCartShopping} /> {itemsInCart !== null ?? itemsInCart.length > 0 ? itemsInCart.length : ''}</Nav.Link>
               </Nav>
               <UnauthenticatedTemplate>
                 <SignInButton />

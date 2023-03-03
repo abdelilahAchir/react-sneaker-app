@@ -133,7 +133,7 @@ export const Cart = (props) => {
 
   return (
     <Container>
-      {itemsInCart.length === 0 ? (
+      {itemsInCart === null ?? itemsInCart.length > 0 ? (
         <h2 className="text-center mt-5">Shopping cart empty</h2>
       ) : (
         <Row>
