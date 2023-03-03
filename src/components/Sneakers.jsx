@@ -5,7 +5,9 @@ import Container from "react-bootstrap/esm/Container";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import SneakerDetails from "./SneakerDetails";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Carousel from 'react-bootstrap/Carousel';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyC5jLQAezHjVaqaL1y3nfPOHXH6KFJ-0oU",
@@ -30,30 +32,39 @@ export const Sneakers = () => {
   useEffect(() => {
     const fetchData = async () => {
       const snapshot = await db.collection("snkrsxu").get();
-      setSneakers(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));  
+      setSneakers(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     };
     fetchData();
   }, []);
-  
+
   const handleSneakerClick = (sneaker) => {
     setSelectedSneaker(sneaker);
     navigate(`/sneakerDetails/${sneaker.brand}/${sneaker.model}`);
   };
-  
+
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
   return (
     <>
-      <Container className="mt-3">
-        <Row>
+      <Container className="mt-3 ">
+        <Row >
           {sneakers.map((sneaker) => (
             <Col xs={12} className="row row-centered pos" key={sneaker.id}>
-              <div className="row row-centered pos" onClick={() => handleSneakerClick(sneaker)}>
-                {sneaker.images_urls.map((image, index) => (
-                  <img key={index} src={image.name} alt={sneaker.brand} />
-                ))}
+              <div key={sneaker.id} className="row row-centered pos " >
+                <Carousel slide={false} className="h-100">
+                  {sneaker.images_urls.map((image, index) => (
+                    <Carousel.Item key={image.name} >
+                      <img className="w-100 h-100 " key={index} src={image.name} alt={sneaker.brand} onClick={() => handleSneakerClick(sneaker)} />
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
               </div>
-              <h2>{sneaker.brand} {sneaker.model}</h2>
-              <h2>{sneaker.gender}</h2>
-              <h3>{sneaker.price}</h3>
+              <h2> Brand: {sneaker.brand}  Model: {sneaker.model}</h2>
+              <h2>Gender: {sneaker.gender}</h2>
+              <h3> Price: {sneaker.price} $</h3>
             </Col>
           ))}
         </Row>
