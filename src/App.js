@@ -14,26 +14,10 @@ import { Routes, } from "react-router";
 import { ShoeContext } from './context/ShoeContext'
 import { Home } from './components/Home'
 import Container from "react-bootstrap/esm/Container";
-import CheckOut from "./components/CheckOut";
+import Payment from "./components/Payment";
+
 
 const App = () => {
-  // const [cart, setCart] = useState([]);
-  // console.log(cart)
-
-  // const addToCart = (sneaker) => {
-  //   // Add the sneaker to the cart state
-  //   setCart([...cart, sneaker]);
-  //   console.log(cart.length)
-  //   console.log(sneaker)
-  //   console.log(cart)
-  // };
-
-  // const removeFromCart = (index) => {
-  //   // Remove the sneaker from the cart state
-  //   const newCart = [...cart];
-  //   newCart.splice(index, 1);
-  //   setCart(newCart);
-  // };
 
   const [itemsInCart, setItemsInCart] = useState([]);
   //console.log(itemsInCart)
@@ -55,6 +39,7 @@ const App = () => {
 
 
   return (
+
     <BrowserRouter>
       <ShoeContext.Provider value={{ itemsInCart, setItemsInCart, numInCart, setNumInCart, shippingInfo, setShippingInfo }}>
         <Container >
@@ -64,12 +49,15 @@ const App = () => {
             <Route path="/sneakersXu" element={<Sneakers />} />
             <Route path="/sneakerDetails/:brand/:model" element={<SneakerDetails />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<CheckOut />} />
 
+
+            <Route path="/checkout" element={<Payment />} />
           </Routes>
         </Container>
       </ShoeContext.Provider>
     </BrowserRouter>
+
+
 
   )
 
