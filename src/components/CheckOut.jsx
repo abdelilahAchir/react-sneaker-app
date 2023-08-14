@@ -58,7 +58,7 @@ const CheckOut = (props) => {
                         break;
                 }
             });
-    }, [])
+    }, [itemsInCart, stripe])
 
     const updateCartTotal = (products) => {
         let sum = 0;
@@ -133,7 +133,7 @@ const CheckOut = (props) => {
                             <dd className="mt-1 text-3xl font-bold tracking-tight text-white">${total}</dd>
                         </dl>
 
-                        <ul role="list" className="divide-y divide-white divide-opacity-10 text-sm font-medium">
+                        <ul className="divide-y divide-white divide-opacity-10 text-sm font-medium">
                             {itemsInCart.map((product, idx) => (
                                 <li key={product.id + idx} className="flex items-start space-x-4 py-6">
                                     <img
