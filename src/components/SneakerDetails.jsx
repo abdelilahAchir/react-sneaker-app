@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import firebase from "firebase/compat/app";
+//import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import firebase from '../database/firebase'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/esm/Container";
-import firebase from "firebase/compat/app";
+//import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import SneakerDetails from "./SneakerDetails";
 import { useNavigate } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
+import firebase from '../database/firebase'
 
-
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: "AIzaSyC5jLQAezHjVaqaL1y3nfPOHXH6KFJ-0oU",
   authDomain: "snkrsxu.firebaseapp.com",
   databaseURL: "https://snkrsxu-default-rtdb.firebaseio.com/",
@@ -18,12 +18,12 @@ const firebaseConfig = {
   messagingSenderId: "652819388919",
   appId: "1:652819388919:web:b77272440eb923c3ebf6f2",
   measurementId: "G-PTF4FMRF51"
-};
+};*/
 
-firebase.initializeApp(firebaseConfig);
+//firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
-
+console.log("dbbbb", db);
 export const Sneakers = () => {
   const [sneakers, setSneakers] = useState([]);
   const [selectedSneaker, setSelectedSneaker] = useState(null);
@@ -36,12 +36,12 @@ export const Sneakers = () => {
     };
     fetchData();
   }, []);
-
   const handleSneakerClick = (sneaker) => {
     setSelectedSneaker(sneaker);
     navigate(`/sneakerDetails/${sneaker.brand}/${sneaker.model}`);
   };
 
+  console.log("sneakers", sneakers);
 
   return (
     <>
